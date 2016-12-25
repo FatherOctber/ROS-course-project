@@ -1,9 +1,9 @@
-This is university project that implements "Robot-Mother" dev task. 
+#The university project that implements "Robot-Mother" course task. 
 
-Description:
+#Description:
 - This is ROS-project (linux ROS, Gazebo simulation)
 - Robot mother (Mother next) commands drone-robots and scout-robots (Drones and Scouts next)
 - Drones serve Mother by resources mining
 - Scouts explore map
 
-Developers: FatherOctber and dydus0x14
+#Developers: FatherOctber and dydus0x14
