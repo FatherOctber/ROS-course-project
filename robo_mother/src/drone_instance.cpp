@@ -5,7 +5,7 @@ int main(int argc, char** argv)
     ros::init(argc, argv, "resource_robot");
     ros::NodeHandle node;
 
-	if (argc == 4) {
+	if (argc == 5) {
     	AbstractRobot* drone = new Drone(node, argv[1],
     	 	ros::this_node::getName(),
     	 	(double) atof(argv[2]),
@@ -14,7 +14,7 @@ int main(int argc, char** argv)
 		drone->spawn();
     	drone->execute();
 	} else {
-		ROS_ERROR("Unconsist parametres count");
+		ROS_ERROR("Unconsistent parametres count");
 	}
 
     return 0;
