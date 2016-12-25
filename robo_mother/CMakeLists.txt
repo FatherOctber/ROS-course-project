@@ -157,6 +157,10 @@ add_executable(drone src/drone_instance.cpp src/drone.cpp src/roboz.cpp)
 target_link_libraries(drone ${catkin_LIBRARIES})
 add_dependencies(drone robo_mother_generate_messages_cpp)
 
+add_executable(scout src/scout_instance.cpp src/scout.cpp src/roboz.cpp)
+target_link_libraries(scout ${catkin_LIBRARIES})
+add_dependencies(scout robo_mother_generate_messages_cpp)
+
 #############
 ## Install ##
 #############
