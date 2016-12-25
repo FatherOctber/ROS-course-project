@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="output" default="screen"/>
+    <arg name="block_model" default="/home/nmishnev/.gazebo/models/cardboard_box/model.sdf"/>
+    <arg name="res_model" default="/home/nmishnev/.gazebo/models/fire_hydrant/model.sdf"/>
+    <arg name="drone_model" default="/home/nmishnev/.gazebo/models/pioneer2dx/green_model.sdf"/>
+	
+    <!-- before this start gazebo_ros empty_world -->
+    <!-- start block 1 -->
+    <node respawn="false" pkg="robo_mother" type="block" name="block1" output="$(arg output)"
+        args="$(arg block_model) 2.0 2.0 0.0">
+    </node>
+
+    <!-- start block 2 -->
+    <node respawn="false" pkg="robo_mother" type="block" name="block2" output="$(arg output)"
+        args="$(arg block_model) 2.0 -2.0 0.0">
+    </node>
+
+    <!-- start resource 1 -->
+    <node respawn="false" pkg="robo_mother" type="resource" name="res1" output="$(arg output)"
+        args="$(arg res_model) 4.0 -1.0 0.0">
+    </node>
+
+    <!-- start resource 2 -->
+    <node respawn="false" pkg="robo_mother" type="resource" name="res2" output="$(arg output)"
+        args="$(arg res_model) -2.0 -1.0 0.0">
+    </node>
+
+    <!-- start drone 1 -->
+    <node respawn="false" pkg="robo_mother" type="drone" name="drone1" output="$(arg output)"
+        args="$(arg drone_model) -2.0 -5.0 0.0">
+    </node>
+
+    <!-- start drone 2 -->
+    <node respawn="false" pkg="robo_mother" type="drone" name="drone2" output="$(arg output)"
+        args="$(arg drone_model) -2.0 5.0 0.0">
+    </node>
+
+</launch>
