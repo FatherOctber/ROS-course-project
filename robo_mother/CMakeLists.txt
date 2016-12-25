@@ -161,6 +161,10 @@ add_executable(scout src/scout_instance.cpp src/scout.cpp src/roboz.cpp)
 target_link_libraries(scout ${catkin_LIBRARIES})
 add_dependencies(scout robo_mother_generate_messages_cpp)
 
+add_executable(mother src/mother_instance.cpp src/mother.cpp src/roboz.cpp)
+target_link_libraries(mother ${catkin_LIBRARIES})
+add_dependencies(mother robo_mother_generate_messages_cpp)
+
 #############
 ## Install ##
 #############

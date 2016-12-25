@@ -5,8 +5,15 @@
     <arg name="res_model" default="/home/nmishnev/.gazebo/models/fire_hydrant/model.sdf"/>
     <arg name="drone_model" default="/home/nmishnev/.gazebo/models/pioneer2dx/green_model.sdf"/>
     <arg name="scout_model" default="/home/nmishnev/.gazebo/models/pioneer2dx/yellow_model.sdf"/>
-	
+    <arg name="mother_model" default="/home/nmishnev/.gazebo/models/warehouse_robot/model.sdf"/>
+
     <!-- before this start gazebo_ros empty_world -->
+
+    <!-- start mother -->
+    <node respawn="false" pkg="robo_mother" type="mother" name="mother" output="$(arg output)"
+        args="$(arg mother_model) 0.0 0.0 0.0">
+    </node>
+	
     <!-- start block 1 -->
     <node respawn="false" pkg="robo_mother" type="block" name="block1" output="$(arg output)"
         args="$(arg block_model) 2.0 2.0 0.0">
