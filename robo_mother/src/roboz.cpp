@@ -8,7 +8,7 @@ namespace Roboz {
 	AbstractObject::AbstractObject(ros::NodeHandle& node, const std::string& name)
 	{
 		this->node = node;
-		this->name = name;
+		this->name = name.substr(1,name.length()-1);
 		mX = 0.0;
 		mY = 0.0;
 		this->state = GlobalState::Idle;
@@ -153,10 +153,11 @@ namespace Roboz {
 	{
 		// update coords
 	    double currentLinearSpeed = mLinearSpeed * distance;
-	    if (currentLinearSpeed > mMaxLinearSpeed) currentLinearSpeed = mMaxLinearSpeed;
+	    if (currentLinearSpeed > mMaxLinearSpeed) 
+	    	currentLinearSpeed = mMaxLinearSpeed;
 	    double diffAngle = atan2(dy, dx);
-	    mX += currentLinearSpeed * std::cos(diffAngle);
-	    mY += currentLinearSpeed * std::sin(diffAngle);
+	    this->mX += currentLinearSpeed * std::cos(diffAngle);
+	    this->mY += currentLinearSpeed * std::sin(diffAngle);
 
 	    // update angle
 	    diffAngle = getRotateAngle(dx, dy);
@@ -171,10 +172,11 @@ namespace Roboz {
 
 	double AbstractMoveableRobot::getRotateAngle(double dx, double dy)
 	{
-	    if (dy == 0) return (dx < 0 ? M_PI : 0.0);
-	    else
-	    {
-	        if (dx == 0) return (dy < 0 ? -M_PI/2 : M_PI/2);
+	    if (dy == 0) 
+	    	return (dx < 0 ? M_PI : 0.0);
+	    else {
+	        if (dx == 0) 
+	        	return (dy < 0 ? -M_PI/2 : M_PI/2);
 	        double angleCos = dx / std::sqrt(dx * dx + dy * dy);
 	        return (dy < 0 ? -std::acos(angleCos) : std::acos(angleCos));
 	    }

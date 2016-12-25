@@ -22,11 +22,6 @@
 	Drone::~Drone()
 	{
 	}
-		
-	void Drone::move(double dx, double dy, double dz)
-	{
-		
-	}
 
 	void Drone::robotCallback(const robo_mother::command::ConstPtr& message)
 	{
@@ -73,7 +68,6 @@
 		{
 			if (state == GlobalState::Idle) {
 				ros::spinOnce();
-				ROS_INFO("Rosource start to be the resource");
 				state = GlobalState::Online;
 			} else {
 				ros::spinOnce();

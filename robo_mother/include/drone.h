@@ -14,7 +14,6 @@ public:
 	virtual void robotCallback(const robo_mother::command::ConstPtr& message);
 		
 protected:
-	virtual void move(double dx, double dy, double dz);
 	virtual void mine(double atX, double atY, double atZ); // command drone to do mining at position
 		
 };	
