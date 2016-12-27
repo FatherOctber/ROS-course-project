@@ -29,7 +29,10 @@ public:
 	int getRandomPart(); //get part of resource
 	virtual void execute();
 	virtual void robotCallback(const robo_mother::command::ConstPtr& message);
-	
+	virtual void decreaseCallback(const robo_mother::robotstate::ConstPtr& message);
+protected:
+	ros::Subscriber decreaseSubscriber;
+	ros::Publisher decreasePublisher;
 private:
 	int resources;
 	double rotationAngle;

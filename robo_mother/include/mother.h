@@ -1,6 +1,7 @@
 #ifndef MOTHER_H
 #define MOTHER_H
 #include "roboz.h"
+#include <map>
 using namespace Roboz;
 
 /**
@@ -13,8 +14,12 @@ public:
 	virtual ~Mother();
 	virtual void execute();
 	virtual void robotCallback(const robo_mother::command::ConstPtr& message);
-
+	virtual void robotstateCallback(const robo_mother::robotstate::ConstPtr& message);
+	virtual void resourcewantedCallback(const robo_mother::robotstate::ConstPtr& message);
 protected:
+	int resources;
+	std::map<int, AllStateItem> allrobots;
+	ros::Publisher resourceFoundPublisher;
 	/**
 	*  mother control scouts and drones
 	**/
