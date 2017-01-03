@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="output" default="screen"/>
-    <arg name="block_model" default="/home/nmishnev/.gazebo/models/cardboard_box/model.sdf"/>
-    <arg name="res_model" default="/home/nmishnev/.gazebo/models/fire_hydrant/model.sdf"/>
-    <arg name="drone_model" default="/home/nmishnev/.gazebo/models/pioneer2dx/green_model.sdf"/>
-    <arg name="scout_model" default="/home/nmishnev/.gazebo/models/pioneer2dx/yellow_model.sdf"/>
-    <arg name="mother_model" default="/home/nmishnev/.gazebo/models/warehouse_robot/model.sdf"/>
+    <arg name="block_model" default="/home/cuda2/.gazebo/models/cardboard_box/model.sdf"/>
+    <arg name="res_model" default="/home/cuda2/.gazebo/models/fire_hydrant/model-1_4.sdf"/>
+    <arg name="drone_model" default="/home/cuda2/.gazebo/models/pioneer2dx/model-1_4.sdf"/>
+    <arg name="scout_model" default="/home/cuda2/.gazebo/models/pioneer2dx/model-1_4.sdf"/>
+    <arg name="mother_model" default="/home/cuda2/.gazebo/models/warehouse_robot/model.sdf"/>
 
     <!-- before this start gazebo_ros empty_world -->
 

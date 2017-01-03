@@ -2,6 +2,7 @@
 #include <gazebo_msgs/SpawnModel.h>
 #include <fstream>
 #include <cmath>
+#include <time.h>
 
 namespace Roboz {
 	
@@ -12,10 +13,17 @@ namespace Roboz {
 		mX = 0.0;
 		mY = 0.0;
 		this->state = GlobalState::Idle;
+
+		std::hash<std::string> hash;
+		id = hash(name);
+		std::cout<<"current id " << id << std::endl;
 	}
 	
 	AbstractObject::AbstractObject(ros::NodeHandle& node, const std::string& name, double x, double y, double z): AbstractObject(node, name)
 	{
+		std::hash<std::string> hash;
+		id = hash(name);
+		std::cout<<"cur id " << id << std::endl;
 		setPosition(x, y, z);
 	}
 	

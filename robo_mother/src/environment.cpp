@@ -70,7 +70,7 @@
 	Resource::Resource(ros::NodeHandle& node, const std::string& model_path, const std::string& name, double x, double y, double z, int size)
 		:AbstractRobot(node, model_path, name, x, y, z)
 	{
-		resources = size;
+		resources = 5;
 		rotationAngle = 0.0;
 	}
 	
@@ -100,6 +100,25 @@
 		}
 	}
 
+	void Resource::decreaseCallback(const robo_mother::robotstate::ConstPtr& message) {
+		int target = message->id;
+		if (target == id) {
+			std::cout << getName() << ": DECREASED( " << resources <<std::endl;
+			resources -= 1;
+
+				robo_mother::robotstate rstate;
+				rstate.id = message->state;
+				rstate.robottype = 1;
+				rstate.x = getX();
+				rstate.y = getY();
+				rstate.state = resources;
+				ros::spinOnce();
+				decreasePublisher.publish(rstate);
+				ros::spinOnce();
+				return;
+		}
+	}
+
 	void Resource::execute()
 	{
 		tf::TransformBroadcaster broadcaster;
@@ -107,7 +126,10 @@
 
 		ros::Publisher gazeboPublisher = node.advertise<gazebo_msgs::ModelState>("gazebo/set_model_state", 10);
 		ros::Publisher succeedPublisher = node.advertise<robo_mother::command>("/command", 1000);
-		ros::Subscriber succeedSupscriber = node.subscribe("/command", 10, &Resource::robotCallback, this);
+		decreasePublisher = node.advertise<robo_mother::robotstate>("/decreaseFromRes", 1000);
+		ros::Subscriber succeedSupscriber = node.subscribe("/command", 1000, &Resource::robotCallback, this);
+		decreaseSubscriber = node.subscribe("/resourcedecrease", 1000, &Resource::decreaseCallback, this);
+		robotstatePublisher = node.advertise<robo_mother::robotstate>("/robotstate", 1000);
 		sleep(1.0);
 
 		gazebo_msgs::ModelState robotState;
@@ -150,6 +172,15 @@
 			broadcaster.sendTransform(tf::StampedTransform(resourceTransform, ros::Time::now(), "world", this->getName()));
 			gazeboPublisher.publish(robotState);
 				
+
+			robo_mother::robotstate rstate;
+			rstate.id = id;
+			rstate.robottype = 1;
+			rstate.x = this->getX();
+			rstate.y = this->getY();
+			rstate.state = resources;
+			robotstatePublisher.publish(rstate);
+
 			rate.sleep();
 
 		}

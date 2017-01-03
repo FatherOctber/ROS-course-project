@@ -3,9 +3,19 @@
 #include <ros/ros.h>
 #include <string>
 #include <robo_mother/command.h>
+#include <robo_mother/robotstate.h>
 
 
 namespace Roboz {
+
+	class AllStateItem {
+	public:
+		int id;
+		int robottype;
+		double x;
+		double y;
+		int state;
+	};
 
 	enum GlobalState { Idle, Online, Offline }; // Global state of world condition: if Offline - close program
 	
@@ -39,6 +49,7 @@ namespace Roboz {
 		double mZ;
 		std::string name;
 		GlobalState state;
+		int id;
 		ros::NodeHandle node;
 	};
 	
@@ -54,6 +65,7 @@ namespace Roboz {
 		virtual void robotCallback(const robo_mother::command::ConstPtr& message)=0;
 		
 	protected:
+		ros::Publisher robotstatePublisher;
 		std::string model;
 	};
 
